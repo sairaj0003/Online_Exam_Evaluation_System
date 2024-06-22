@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/exam.css" />
+</head>
+<body>
+	<div class="main-container">
+        <div class="left-column">
+			{% if question %}
+			<form method="POST" action="{{ url_for('updateQuestion', testid=testid, qid=question[1]) }}" enctype="multipart/form-data" >
+			{% else %}
+			<form method="POST" action="{{ url_for('addQuestion', testid=testid) }}" enctype="multipart/form-data" >
+			{% endif %}
+			
+				<!-- <div class="ec">
+					<label for="ques_id">Question ID*</label>
+					<input type="number" name="ques_id" id="ques_id" required>
+				</div> -->
+				<div class="ec">
+					<label for="question" class="f-1">Question*</label>
+					<textarea id="question" name="question" rows="4" cols="50" required class="f-2">{% if question %} {{ question[3] }} {% endif %}</textarea>
+				</div>
+				<div class="ec">
+					<label for="q_img" class="f-1">Question Image</label>
+					<input type="file" name="q_img" id="q_img" accept="image/*" class="f-2">
+				</div>
+								<!-- Buttons to toggle visibility -->
+								<div class="ec">
+									<label class="f-1">Answer Type*</label>
+									<button type="button" onclick="showOptions()" class="btn">Options</button>
+									<button type="button" onclick="showDescriptive()" class="btn">Descriptive</button>
+								</div>
+				
+								<!-- Options Section -->
+								<div id="options-section" class="hidden">
+									<div class="ec">
+										<label for="opt_A" class="f-1">A*</label>
+										<textarea id="opt_A" name="opt_A" rows="4" cols="50" class="f-2">{% if question %} {{ question[5] }} {% endif %}</textarea>
+									</div><br>
+									<div class="ec">
+										<label for="opt_A_img" class="f-1">Image for A</label>
+										<input type="file" name="opt_A_img" id="opt_A_img" accept="image/*" class="f-2">
+									</div><br>
+									<div class="ec">
+										<label for="opt_B" class="f-1">B*</label>
+										<textarea id="opt_B" name="opt_B" rows="4" cols="50" class="f-2">{% if question %} {{ question[7] }} {% endif %}</textarea>
+									</div><br>
+									<div class="ec">
+										<label for="opt_B_img" class="f-1">Image for B</label>
+										<input type="file" name="opt_B_img" id="opt_B_img" accept="image/*" class="f-2">
+									</div><br>
+									<div class="ec">
+										<label for="opt_C" class="f-1">C*</label>
+										<textarea id="opt_C" name="opt_C" rows="4" cols="50" class="f-2">{% if question %} {{ question[9] }} {% endif %}</textarea>
+									</div><br>
+									<div class="ec">
+										<label for="opt_C_img" class="f-1">Image for C</label>
+										<input type="file" name="opt_C_img" id="opt_C_img" accept="image/*" class="f-2">
+									</div><br>
+									<div class="ec">
+										<label for="opt_D" class="f-1">D*</label>
+										<textarea id="opt_D" name="opt_D" rows="4" cols="50" class="f-2">{% if question %} {{ question[11] }} {% endif %}</textarea>
+									</div><br>
+									<div class="ec">
+										<label for="opt_D_img" class="f-1">Image for D</label>
+										<input type="file" name="opt_D_img" id="opt_D_img" accept="image/*" class="f-2">
+									</div><br>
+									<div class="ec">
+										<label for="opt_ans" class="f-1">Option Answer*</label>
+										<select id="opt_ans" name="opt_ans" class="f-2">
+											<option value="0">Select</option>
+											<option value="A" {% if question %} {% if question[13] == 'A' %} selected {% endif %} {% endif %}>A</option>
+											<option value="B" {% if question %} {% if question[13] == 'B' %} selected {% endif %} {% endif %}>B</option>
+											<option value="C" {% if question %} {% if question[13] == 'C' %} selected {% endif %} {% endif %}>C</option>
+											<option value="D" {% if question %} {% if question[13] == 'D' %} selected {% endif %} {% endif %}>D</option>
+										</select>
+									</div>
+								</div>
+				
+								<!-- Descriptive Section -->
+								<div id="descriptive-section" class="hidden">
+									<div class="ec">
+										<label for="answer" class="f-1">Descriptive Answer*</label>
+										<textarea id="answer" name="answer" rows="4" cols="50" class="f-2">{% if question %} {{ question[14] }} {% endif %}</textarea>
+									</div>
+								</div>
+				<div class="ec">
+					<label for="q_marks" class="f-1">Marks*</label>
+					<input type="number" {% if question %} value="{{ question[15] }}" {% endif %} name="q_marks" id="q_marks" required class="f-2">
+				</div>
+				<div class="ec">
+					<!-- <p>No more questions to be added then</p> -->
+					<a href="{{ url_for('exams') }}" class="btn">Cancel</a>
+					{% if question %}
+					<button type="submit" value="submit" class="btn">Update</button>
+					<a href="{{ url_for('deleteQuestion', testid=testid, qid=question[1]) }}" class="btn">Delete</a>
+					<a href="{{ url_for('addQuestion', testid=testid) }}" class="btn">New Question</a>
+					{% else %}
+					<button type="submit" value="submit" class="btn">Add Question</button>
+					{% endif %}
+				</div>
+			</form>
+		</div>
+		<div class="right-column">
+            <div class="box-container">
+				{% for i in range(1, x+1) %}
+                    <a href="{{ url_for('updateQuestion', testid=testid, qid=i) }}" class="box">{{ i }}</a>
+                {% endfor %}
+            </div>
+			<a href="{{ url_for('deleteExam', testid=testid) }}" class="btn">Delete Exam</a>
+			<a href="{{ url_for('exams') }}" class="btn">Finish</a>
+        </div>
+	</div>
+
+	
+	
+	<script>
+		function showOptions() {
+			document.getElementById('options-section').classList.remove('hidden');
+			document.getElementById('descriptive-section').classList.add('hidden');
+		}
+	
+		function showDescriptive() {
+			document.getElementById('descriptive-section').classList.remove('hidden');
+			document.getElementById('options-section').classList.add('hidden');
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+		// Get all clickable links and buttons
+		const clickableElements = document.querySelectorAll('.btn');
+
+		// Add click event listener to each element
+		clickableElements.forEach(function (element) {
+			element.addEventListener('click', function () {
+				// Remove 'clicked' class from all elements
+				clickableElements.forEach(function (el) {
+					el.classList.remove('clicked');
+				});
+
+				// Add 'clicked' class to the clicked element
+				this.classList.add('clicked');
+			});
+		});
+	});
+
+	</script>
+	
+</body>
+</html>

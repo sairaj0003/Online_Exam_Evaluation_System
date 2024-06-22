@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/exam.css" />
+</head>
+<body>
+
+<section>
+    <div class="main-container">
+        <div class="left-column">
+        <form method="POST" action="{{ url_for('fedit', username=data[2]) }}" enctype="multipart/form-data">
+            <div class="ec">
+                <label for="fname" class="f-1">First Name*</label>
+                <input type="text" value="{{ data[0] }}" name="fname" id="fname" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="lname" class="f-1">Last Name*</label>
+                <input type="text" value="{{ data[1] }}" name="lname" id="lname" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="email" class="f-1">Email*</label>
+                <input type="email" value="{{ data[4] }}" name="email" id="email" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="mob_no" class="f-1">Mobile Number*</label>
+                <input type="tel" value="{{ data[5] }}" name="mob_no" id="mob_no" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="department" class="f-1">Department*</label>
+                <select id="department" name="department" required class="f-2">
+                    <option value="0">Select</option>
+                    <option value="CSE" {% if data[6] == 'CSE' %} selected {% endif %}>CSE</option>
+                    <option value="CSM" {% if data[6] == 'CSM' %} selected {% endif %}>CSM</option>
+                    <option value="CSW" {% if data[6] == 'CSW' %} selected {% endif %}>CSW</option>
+                    <option value="CSO" {% if data[6] == 'CSO' %} selected {% endif %}>CSO</option>
+                </select>
+            </div>
+            <div class="ec">
+                <label for="about" class="f-1">About</label>
+                <textarea name="about" id="about" rows="4" cols="50" required class="f-2">{% if data %} {{ data[8] }} {% endif %}</textarea>
+            </div>
+
+            <h1>{{ msg }}</h1>
+            <div class="ec">
+                <a href="{{ url_for('fprofile', username=data[2]) }}" class="btn">Cancel</a>
+                <button type="submit" value="submit" class="btn">Update</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

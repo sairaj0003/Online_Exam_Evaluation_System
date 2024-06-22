@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Online Descriptive Exam Evaluation System</title>
+
+    <link rel="stylesheet" href="../static/css/style-starter.css">
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body id="home">
+  <section class=" w3l-header-4">
+    <!--header-->
+    <header id="site-header">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark stroke">
+          <h1><a class="navbar-brand" href="{{ url_for('fdashboard', username=rollnumber) }}">
+            <span class="fa fa-book"></span> Exam
+          </a></h1>
+          <!-- if logo is image enable this   
+        <a class="navbar-brand" href="#index.html">
+          <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+        </a> -->
+          <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+            <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('addExam') }}">Add Exam</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('exams') }}">Exams</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('results') }}">Results</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('fprofile', username=rollnumber) }}">Profile</a>
+              </li>
+                <li class="nav-item mr-2">
+                  <a href="{{ url_for('logout') }}" class="btn btn-primary register d-lg-block btn-style">Logout</a>
+              </li>
+            </ul>
+          </div>
+                  <!-- toggle switch for light and dark theme -->
+              <div class="mobile-position">
+                <label class="theme-selector">
+                  <input type="checkbox" id="themeToggle">
+                  <i class="gg-sun"></i>
+                  <i class="gg-moon"></i>
+                </label>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+        </nav>
+      </div>
+      </header>
+    <!--/header-->
+  </section>
+  
+  
+  <script src="../static/js/jquery-3.3.1.min.js"></script> <!-- Common jquery plugin -->
+  <!--bootstrap working-->
+  <script src="../static/js/bootstrap.min.js"></script>
+  <!--bootstrap working//-->
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+    
+      if (scroll >= 80) {
+      $("#site-header").addClass("nav-fixed");
+      } else {
+      $("#site-header").removeClass("nav-fixed");
+      }
+    });
+    
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+      $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      });
+    });
+    </script>
+    <!--//MENU-JS-->
+  <!-- disable body scroll which navbar is in active -->
+  <script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+  </script>
+  <!-- disable body scroll which navbar is in active -->
+  <!--theme switcher dark and light mode script-->
+  <script>
+    const bodyElement = document.querySelector('body');
+    const themeToggle = document.querySelector('#themeToggle');
+    const darkModeMql = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : userPreference(darkModeMql);
+    
+    if (currentTheme) {
+      bodyElement.classList.add(currentTheme);
+    
+      if (currentTheme === 'dark') {
+      themeToggle.checked = true;
+      }
+    }
+    
+    function userPreference(e) {
+      if (e.matches) {
+      bodyElement.classList.add("dark");
+      return "dark"
+      } else {
+      bodyElement.classList.remove("dark");
+      return ""
+      }
+    }
+    
+    darkModeMql.addListener(userPreference);
+    
+    function themeSwitcher(e) {
+      if (e.target.checked) {
+      bodyElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      } else {
+      bodyElement.classList.remove('dark');
+      localStorage.setItem('theme', '');
+      }
+    }
+    
+    themeToggle.addEventListener('change', themeSwitcher);
+    </script>
+    <!--theme switcher dark and light mode script//-->
+  
+    <section class="w3l-hero-headers-9" id="home">
+      <div class="slide header11" data-selector="header11">
+          <div class="container">
+              <div class="banner-text ">
+                  <h5 class=" ">Hi {{fname}} &nbsp;{{lname}} </h5>
+                  <p style="font-size: 30px; padding-bottom: 5px;">Welcome to Online Exam Evaluation System!</p>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <section class="w3l-footer-29-main">
+      <div class="footer-29 py-5 ">
+        <div class="container">
+        <div class="grid-col-4 footer-top-29">
+          <div class="footer-list-29 footer-1">
+            <h2 class="footer-title-29">About Us</h2>
+             <p class="para">This digital platform designed to administer, evaluate, and manage examinations electronically, enabling automated grading and secure handling of exam data. It enhances efficiency and accuracy in the assessment process while providing a convenient and accessible solution for both educators and students.</p>
+          </div>
+
+          <div class="footer-list-29 footer-3">
+            <div class="properties">
+              <h6 class="footer-title-29">Contact Us</h6>
+    
+            <ul>
+              <li><p><span class="fa fa-map-marker"></span>BITS Narsampet</p></li>
+              <li><a href="tel:+91-963-258-7415"><span class="fa fa-phone"></span> +(91)-963-258-7415</a></li>
+              <li><a href="mailto:sairajg@gmail.com" class="mail"><span class="fa fa-envelope-open-o"></span> sairajg@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+        <div class=" bottom-copies row">
+          <p class="copy-footer-29 col-lg-8">© 2024 OEES. All rights reserved </p>
+        </div>
+        </div>
+      </div>
+      </section>
+    
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+      <span class="fa fa-level-up"></span>
+    </button>
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction()
+      };
+    
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("movetop").style.display = "block";
+        } else {
+          document.getElementById("movetop").style.display = "none";
+        }
+      }
+    
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+    <!-- /move top -->
+    
+</body>
+</html>

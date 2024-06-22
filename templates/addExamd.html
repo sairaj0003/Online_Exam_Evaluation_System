@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Online Descriptive Exam Evaluation System</title>
+
+    <link rel="stylesheet" href="../static/css/style-starter.css">
+    <!-- <link rel="stylesheet" href="../static/css/addexam.css"> -->
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body id="home">
+  <section class=" w3l-header-4">
+    <!--header-->
+    <header id="site-header">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark stroke">
+          <h1><a class="navbar-brand" href="{{ url_for('fdashboard', username=rollnumber) }}">
+            <span class="fa fa-book"></span> Exam
+          </a></h1>
+          <!-- if logo is image enable this   
+        <a class="navbar-brand" href="#index.html">
+          <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+        </a> -->
+          <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+            <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('addExam') }}">Add Exam</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('exams') }}">Exams</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('results') }}">Results</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+              </li>
+                <li class="nav-item mr-2">
+                  <a href="{{ url_for('logout') }}" class="btn btn-primary register d-lg-block btn-style">Logout</a>
+              </li>
+            </ul>
+          </div>
+                  <!-- toggle switch for light and dark theme -->
+              <div class="mobile-position">
+                <label class="theme-selector">
+                  <input type="checkbox" id="themeToggle">
+                  <i class="gg-sun"></i>
+                  <i class="gg-moon"></i>
+                </label>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+        </nav>
+      </div>
+      </header>
+    <!--/header-->
+  </section>
+  
+  
+  <script src="../static/js/jquery-3.3.1.min.js"></script> <!-- Common jquery plugin -->
+  <!--bootstrap working-->
+  <script src="../static/js/bootstrap.min.js"></script>
+  <!--bootstrap working//-->
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+    
+      if (scroll >= 80) {
+      $("#site-header").addClass("nav-fixed");
+      } else {
+      $("#site-header").removeClass("nav-fixed");
+      }
+    });
+    
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+      $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      });
+    });
+    </script>
+    <!--//MENU-JS-->
+  <!-- disable body scroll which navbar is in active -->
+  <script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+  </script>
+  <!-- disable body scroll which navbar is in active -->
+  <!--theme switcher dark and light mode script-->
+  <script>
+    const bodyElement = document.querySelector('body');
+    const themeToggle = document.querySelector('#themeToggle');
+    const darkModeMql = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : userPreference(darkModeMql);
+    
+    if (currentTheme) {
+      bodyElement.classList.add(currentTheme);
+    
+      if (currentTheme === 'dark') {
+      themeToggle.checked = true;
+      }
+    }
+    
+    function userPreference(e) {
+      if (e.matches) {
+      bodyElement.classList.add("dark");
+      return "dark"
+      } else {
+      bodyElement.classList.remove("dark");
+      return ""
+      }
+    }
+    
+    darkModeMql.addListener(userPreference);
+    
+    function themeSwitcher(e) {
+      if (e.target.checked) {
+      bodyElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      } else {
+      bodyElement.classList.remove('dark');
+      localStorage.setItem('theme', '');
+      }
+    }
+    
+    themeToggle.addEventListener('change', themeSwitcher);
+    </script>
+    <!--theme switcher dark and light mode script//-->
+  
+	<section class="w3l-contact-info-main" id="contact">
+		<div class="contact-sec	editContent">
+			<div class="container">
+				<div class="d-grid contact-view">
+					<div class="map-content-9 pl-lg-5 ">
+						<form action="//sendmail.w3layouts.com/submitForm" method="post">
+							<div class="ec">
+								<label for="exam_name" class="el">Exam Name</label>
+								<input type="text" class="form-control er" name="w3lName" id="w3lName" placeholder="Name" required="">
+							</div>
+								<input type="email" class="form-control" name="w3lSender" id="w3lSender" placeholder="Email" required="">
+								<input type="text" class="form-control" name="w3lSubject" id="w3lSubject" placeholder="Subject" required="">
+
+							<textarea name="w3lMessage" class="form-control" id="w3lMessage" placeholder="Message" required=""></textarea>
+				
+							<div class="text-right">
+								<button type="submit" class="btn btn-contact">Send Message</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<form method="POST" action="{{ url_for('addExam') }}">
+				<div class="ec">
+					<label for="exam_name" class="el">Exam Name</label>
+					<input type="text" name="exam_name" id="exam_name" required class="er">
+				</div>
+				<div class="ec">
+					<label for="img">Exam Photo</label>
+					<input type="file" name="img" id="img" accept="image/*">
+				</div>
+				<div class="ec">
+					<label for="test_id">Test ID</label>
+					<input type="number" name="test_id" id="test_id" required>
+				</div>
+				<div class="ec">
+					<label for="ques_id">Question ID</label>
+					<input type="number" name="ques_id" id="ques_id" required>
+				</div>
+				<div class="ec">
+					<label>CSM</label>
+					<input type="checkbox" id="csm1" name="options" value="csm1">
+					<label for="csm1">1</label><br>
+					<input type="checkbox" id="csm2" name="options" value="csm2">
+					<label for="csm2">2</label><br>
+					<input type="checkbox" id="csm3" name="options" value="csm3">
+					<label for="csm3">3</label><br>
+					<input type="checkbox" id="csm4" name="options" value="csm4">
+					<label for="csm4">4</label><br>
+					<input type="checkbox" id="csm5" name="options" value="csm5">
+					<label for="csm5">5</label><br>
+					<input type="checkbox" id="csm6" name="options" value="csm6">
+					<label for="csm6">6</label><br>
+					<input type="checkbox" id="csm7" name="options" value="csm7">
+					<label for="csm7">7</label><br>
+					<input type="checkbox" id="csm8" name="options" value="csm8">
+					<label for="csm8">8</label><br>
+				</div>
+				<div class="ec">
+					<label>CSW</label>
+					<input type="checkbox" id="csw1" name="options" value="csw1">
+					<label for="csw1">1</label><br>
+					<input type="checkbox" id="csw2" name="options" value="csw2">
+					<label for="csw2">2</label><br>
+					<input type="checkbox" id="csw3" name="options" value="csw3">
+					<label for="csw3">3</label><br>
+					<input type="checkbox" id="csw4" name="options" value="csw4">
+					<label for="csw4">4</label><br>
+					<input type="checkbox" id="csw5" name="options" value="csw5">
+					<label for="csw5">5</label><br>
+					<input type="checkbox" id="csw6" name="options" value="csw6">
+					<label for="csw6">6</label><br>
+					<input type="checkbox" id="csw7" name="options" value="csw7">
+					<label for="csw7">7</label><br>
+					<input type="checkbox" id="csw8" name="options" value="csw8">
+					<label for="csw8">8</label><br>
+				</div>
+				<div class="ec">
+					<label>CSO</label>
+					<input type="checkbox" id="cso1" name="options" value="cso1">
+					<label for="cso1">1</label><br>
+					<input type="checkbox" id="cso2" name="options" value="cso2">
+					<label for="cso2">2</label><br>
+					<input type="checkbox" id="cso3" name="options" value="cso3">
+					<label for="cso3">3</label><br>
+					<input type="checkbox" id="cso4" name="options" value="cso4">
+					<label for="cso4">4</label><br>
+					<input type="checkbox" id="cso5" name="options" value="cso5">
+					<label for="cso5">5</label><br>
+					<input type="checkbox" id="cso6" name="options" value="cso6">
+					<label for="cso6">6</label><br>
+					<input type="checkbox" id="cso7" name="options" value="cso7">
+					<label for="cso7">7</label><br>
+					<input type="checkbox" id="cso8" name="options" value="cso8">
+					<label for="cso8">8</label><br>
+				</div>
+				<div class="ec">
+					<label for="question">Question</label>
+					<textarea id="question" name="question" rows="4" cols="50" required></textarea>
+				</div>
+				<div class="ec">
+					<label for="q_img">Question Image</label>
+					<input type="file" name="q_img" id="q_img" accept="image/*">
+				</div>
+				                <!-- Buttons to toggle visibility -->
+								<div class="ec">
+									<button type="button" onclick="showOptions()">Options</button>
+									<button type="button" onclick="showDescriptive()">Descriptive</button>
+								</div>
+				
+								<!-- Options Section -->
+								<div id="options-section" class="hidden">
+									<div class="ec">
+										<label for="opt_A">A</label>
+										<textarea id="opt_A" name="opt_A" rows="4" cols="50"></textarea>
+									</div>
+									<div class="ec">
+										<label for="opt_A_img">Image for A</label>
+										<input type="file" name="opt_A_img" id="opt_A_img" accept="image/*">
+									</div>
+									<div class="ec">
+										<label for="opt_B">B</label>
+										<textarea id="opt_B" name="opt_B" rows="4" cols="50"></textarea>
+									</div>
+									<div class="ec">
+										<label for="opt_B_img">Image for B</label>
+										<input type="file" name="opt_B_img" id="opt_B_img" accept="image/*">
+									</div>
+									<div class="ec">
+										<label for="opt_C">C</label>
+										<textarea id="opt_C" name="opt_C" rows="4" cols="50"></textarea>
+									</div>
+									<div class="ec">
+										<label for="opt_C_img">Image for C</label>
+										<input type="file" name="opt_C_img" id="opt_C_img" accept="image/*">
+									</div>
+									<div class="ec">
+										<label for="opt_D">D</label>
+										<textarea id="opt_D" name="opt_D" rows="4" cols="50"></textarea>
+									</div>
+									<div class="ec">
+										<label for="opt_D_img">Image for D</label>
+										<input type="file" name="opt_D_img" id="opt_D_img" accept="image/*">
+									</div>
+									<div class="ec">
+										<label for="opt_ans">Option Answer</label>
+										<select id="opt_ans" name="opt_ans">
+											<option value="A">A</option>
+											<option value="B">B</option>
+											<option value="C">C</option>
+											<option value="D">D</option>
+										</select>
+									</div>
+								</div>
+				
+								<!-- Descriptive Section -->
+								<div id="descriptive-section" class="hidden">
+									<div class="ec">
+										<label for="answer">Descriptive Answer</label>
+										<textarea id="answer" name="answer" rows="4" cols="50"></textarea>
+									</div>
+								</div>
+				<div class="ec">
+					<label for="q_marks">Marks</label>
+					<input type="number" name="q_marks" id="q_marks" required>
+				</div>
+				<div class="ec">
+					<label for="start_datetime">Start Date and Time:</label>
+					<input type="datetime-local" id="start_datetime" name="start_datetime" required>
+				</div>
+				<div class="ec">
+					<label for="end_datetime">End Date and Time:</label>
+					<input type="datetime-local" id="end_datetime" name="end_datetime" required>
+				</div>
+				<div class="ec">
+					<button type="submit" value="submit">Create Exam</button>
+				</div>
+			</form>
+		</div>
+	</section>
+
+
+    <script>
+        function showOptions() {
+            document.getElementById('options-section').classList.remove('hidden');
+            document.getElementById('descriptive-section').classList.add('hidden');
+        }
+
+        function showDescriptive() {
+            document.getElementById('descriptive-section').classList.remove('hidden');
+            document.getElementById('options-section').classList.add('hidden');
+        }
+    </script>
+
+    <section class="w3l-footer-29-main">
+      <div class="footer-29 py-5 ">
+        <div class="container">
+        <div class="grid-col-4 footer-top-29">
+          <div class="footer-list-29 footer-1">
+            <h2 class="footer-title-29">About Us</h2>
+             <p class="para">This digital platform designed to administer, evaluate, and manage examinations electronically, enabling automated grading and secure handling of exam data. It enhances efficiency and accuracy in the assessment process while providing a convenient and accessible solution for both educators and students.</p>
+          </div>
+
+          <div class="footer-list-29 footer-3">
+            <div class="properties">
+              <h6 class="footer-title-29">Contact Us</h6>
+    
+            <ul>
+              <li><p><span class="fa fa-map-marker"></span>BITS Narsampet</p></li>
+              <li><a href="tel:+91-963-258-7415"><span class="fa fa-phone"></span> +(91)-963-258-7415</a></li>
+              <li><a href="mailto:sairajg@gmail.com" class="mail"><span class="fa fa-envelope-open-o"></span> sairajg@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+        <div class=" bottom-copies row">
+          <p class="copy-footer-29 col-lg-8">© 2024 OEES. All rights reserved </p>
+        </div>
+        </div>
+      </div>
+      </section>
+    
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+      <span class="fa fa-level-up"></span>
+    </button>
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction()
+      };
+    
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("movetop").style.display = "block";
+        } else {
+          document.getElementById("movetop").style.display = "none";
+        }
+      }
+    
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+    <!-- /move top -->
+    
+</body>
+</html>

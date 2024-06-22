@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" />
+</head>
+<!-- <header>
+    <div class="navbar-header">
+      <a class="navbar-brand" rel="home" href="/" title="Python Programming Tutorials ">
+          <img style="max-width:120px; margin-top: -7px;" src="{{ url_for('static', filename='images/mainlogo.png') }}">
+      </a>
+    </div>
+  
+    <div class="container-fluid">
+      <ul class="nav nav-pills">
+          <a href="/dashboard/"><button type="button" class="btn btn-primary" style=" margin-top: 5px; margin-bottom: 5px; height:44px; margin-right: 15px">
+              <span class="glyphicon glyphicon-off"></span> Start Learning
+          </button></a>
+        <ul class="nav navbar-nav navbar-right">
+        {% if session.logged_in %}
+          <div style="margin-right: 10px; margin-left: 15px;  margin-top: 5px; margin-bottom: 5px;" class="container-fluid">
+          <h5><a href="/support-donate/"> <span class="glyphicon glyphicon-heart"></span> Support&nbsp;&nbsp;&nbsp;</a>
+          <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></h5>
+          </div>
+        {% else %}
+        <div style="margin-right: 10px; margin-left: 15px; margin-top: 5px; margin-bottom: 5px;" class="container-fluid">
+          <h5><a href="/support-donate/"> <span class="glyphicon glyphicon-heart"></span> Support&nbsp;&nbsp;&nbsp;</a>
+          <a href="/login/"> <span class="glyphicon glyphicon-log-in"></span> Login</a>&nbsp;&nbsp;&nbsp;
+          <a href="/register/" ><span class="glyphicon glyphicon-pencil"></span> Sign up</a></h5>
+        </div>
+        {% endif %}
+        </ul>
+      </ul>
+    </div>
+</header> -->
+{% block body %}
+{% endblock %}
+<footer>
+    
+</footer>
+</html>

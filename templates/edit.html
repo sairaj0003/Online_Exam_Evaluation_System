@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/exam.css" />
+</head>
+<body>
+
+<section>
+    <div class="main-container">
+        <div class="left-column">
+        <form method="POST" action="{{ url_for('edit', username=data[2]) }}" enctype="multipart/form-data">
+            <div class="ec">
+                <label for="fname" class="f-1">First Name*</label>
+                <input type="text" value="{{ data[0] }}" name="fname" id="fname" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="lname" class="f-1">Last Name*</label>
+                <input type="text" value="{{ data[1] }}" name="lname" id="lname" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="email" class="f-1">Email*</label>
+                <input type="email" value="{{ data[4] }}" name="email" id="email" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="mob_no" class="f-1">Mobile Number*</label>
+                <input type="tel" value="{{ data[5] }}" name="mob_no" id="mob_no" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="department" class="f-1">Department*</label>
+                <select id="department" name="department" required class="f-2">
+                    <option value="0">Select</option>
+                    <option value="CSE" {% if data[6] == 'CSE' %} selected {% endif %}>CSE</option>
+                    <option value="CSM" {% if data[6] == 'CSM' %} selected {% endif %}>CSM</option>
+                    <option value="CSW" {% if data[6] == 'CSW' %} selected {% endif %}>CSW</option>
+                    <option value="CSO" {% if data[6] == 'CSO' %} selected {% endif %}>CSO</option>
+                </select>
+            </div>
+            <div class="ec">
+                <label for="sem" class="f-1">Semester*</label>
+                <select id="sem" name="sem" required class="f-2">
+                    <option value="0">Select</option>
+                    <option value="1" {% if data[7] == 1 %} selected {% endif %}>1</option>
+                    <option value="2" {% if data[7] == 2 %} selected {% endif %}>2</option>
+                    <option value="3" {% if data[7] == 3 %} selected {% endif %}>3</option>
+                    <option value="4" {% if data[7] == 4 %} selected {% endif %}>4</option>
+                    <option value="5" {% if data[7] == 5 %} selected {% endif %}>5</option>
+                    <option value="6" {% if data[7] == 6 %} selected {% endif %}>6</option>
+                    <option value="7" {% if data[7] == 7 %} selected {% endif %}>7</option>
+                    <option value="8" {% if data[7] == 8 %} selected {% endif %}>8</option>
+                </select>
+            </div>
+            <div class="ec">
+                <label for="dob" class="f-1">Date of Birth</label>
+                <input type="date" {% if data %} value="{{ data[8] }}" {% endif %} name="dob" id="dob" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="guardian" class="f-1">Guardian Name</label>
+                <input type="text" {% if data %} value="{{ data[9] }}" {% endif %} name="guardian" id="guardian" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="g_mob_no" class="f-1">Guardian Mobile Number</label>
+                <input type="tel" {% if data %} value="{{ data[10] }}" {% endif %} name="g_mob_no" id="g_mob_no" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="about" class="f-1">About</label>
+                <textarea name="about" id="about" rows="4" cols="50" required class="f-2">{% if data %} {{ data[12] }} {% endif %}</textarea>
+            </div>
+
+            <h1>{{ msg }}</h1>
+            <div class="ec">
+                <a href="{{ url_for('profile', username=data[2]) }}" class="btn">Cancel</a>
+                <button type="submit" value="submit" class="btn">Update</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/exam.css" />
+</head>
+<body>
+    <div class="main-container">
+        <div class="left-column">
+            <form method="POST" action="{{ url_for('exam', testid=question[0], qid=question[1]) }}">
+                <div class="ec">
+                    <label class="f-1">Q No: {{ question[1] }}</label>
+                    <label class="f-2">Marks: {{ question[15] }}</label>
+                </div>
+                <div class="ec">
+                    <label class="f-1">Question</label>
+                    <p class="f-2">{{ question[3] }}</p>
+                </div>
+                <div class="ec">
+                    {% if question[4] %}
+                        <img src="data:image/jpeg;base64,{{ question[4] }}">
+                    {% endif %}
+                </div>
+                {% if question[13] != '0' %}
+                    <div class="ec">
+                        <label class="f-1">A: </label>
+                        <p class="f-2">{{ question[5] }}</p>
+                    </div>
+                    <div class="ec">
+                        {% if question[6] %}
+                            <img src="data:image/jpeg;base64,{{ question[6] }}">
+                        {% endif %}
+                    </div>
+                    <div class="ec">
+                        <label class="f-1">B: </label>
+                        <p class="f-2">{{ question[7] }}</p>
+                    </div>
+                    <div class="ec">
+                        {% if question[8] %}
+                            <img src="data:image/jpeg;base64,{{ question[8] }}">
+                        {% endif %}
+                    </div>
+                    <div class="ec">
+                        <label class="f-1">C: </label>
+                        <p class="f-2">{{ question[9] }}</p>
+                    </div>
+                    <div class="ec">
+                        {% if question[10] %}
+                            <img src="data:image/jpeg;base64,{{ question[10] }}">
+                        {% endif %}
+                    </div>
+                    <div class="ec">
+                        <label class="f-1">D</label>
+                        <p class="f-2">{{ question[11] }}</p>
+                    </div>
+                    <div class="ec">
+                        {% if question[12] %}
+                            <img src="data:image/jpeg;base64,{{ question[12] }}">
+                        {% endif %}
+                    </div>
+                    <div class="ec">
+                        <label class="f-1">Answer</label>
+                        <select id="opt_ans" name="opt_ans" class="f-2">
+                            <option value="0">Select</option>
+                            <option value="A" {% if data %} {% if data[3] == 'A' %} selected {% endif %} {% endif %}>A</option>
+                            <option value="B" {% if data %} {% if data[3] == 'B' %} selected {% endif %} {% endif %}>B</option>
+                            <option value="C" {% if data %} {% if data[3] == 'C' %} selected {% endif %} {% endif %}>C</option>
+                            <option value="D" {% if data %} {% if data[3] == 'D' %} selected {% endif %} {% endif %}>D</option>
+                        </select>
+                    </div>
+                {% else %}
+                    <div class="ec">
+                        <label class="f-1">Answer</label>
+                        <textarea id="answer" name="answer" rows="4" cols="50" class="f-2"> {% if data %} {{ data[4] }} {% endif %}</textarea>
+                    </div>
+                {% endif %}
+
+                <h4>{{ msg }}</h4>
+                {% if question[1] != count %}
+                    <button type="submit" value="submit"  class="btn">Save & Next</button>
+                {% else %}
+                    <button type="submit" value="submit"  class="btn">Save</button>
+                {% endif %}
+            </form>
+        </div>
+        <div class="right-column">
+            <div class="box-container">
+                {% for i in range(1, count+1) %}
+                    <a href="{{ url_for('exam', testid=question[0], qid=i) }}" class="box">{{ i }}</a>
+                {% endfor %}
+            </div>
+            <a href="{{ url_for('result', testid=question[0]) }}" class="btn">Submit</a>
+        </div>
+    </div>
+</body>
+</html>

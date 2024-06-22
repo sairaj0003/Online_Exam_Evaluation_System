@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/exam.css" />
+</head>
+<body>
+
+<section>
+    <div class="main-container">
+        <div class="left-column">
+        <form method="POST" action="{{ url_for('addExam') }}" enctype="multipart/form-data">
+            <div class="ec">
+                <label for="exam_name" class="f-1">Exam Name*</label>
+                <input type="text" name="exam_name" id="exam_name" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="img" class="f-1">Exam Photo</label>
+                <input type="file" name="img" id="img" accept="image/*" class="f-2">
+            </div>
+            <!-- <div class="ec">
+                <label for="test_id">Test ID*</label>
+                <input type="number" name="test_id" id="test_id" required>
+            </div>
+            <div class="ec">
+                <label for="ques_id">Question ID*</label>
+                <input type="number" name="ques_id" id="ques_id" required>
+            </div> -->
+
+            <div class="ec">
+                <label class="f-1">Branch*</label>
+                <button type="button" onclick="csm()" class="btn">CSM</button>
+                <button type="button" onclick="csw()" class="btn">CSW</button>
+                <button type="button" onclick="cso()" class="btn">CSO</button>
+                <button type="button" onclick="cse()" class="btn">CSE</button>
+            </div>
+            <div id="csm" class="hidden">
+            <div class="ec">
+                <label class="f-1">CSM</label>
+                <input type="checkbox" id="csm1" name="options" value="csm1">
+                <label for="csm1">1</label><br>
+                <input type="checkbox" id="csm2" name="options" value="csm2">
+                <label for="csm2">2</label><br>
+                <input type="checkbox" id="csm3" name="options" value="csm3">
+                <label for="csm3">3</label><br>
+                <input type="checkbox" id="csm4" name="options" value="csm4">
+                <label for="csm4">4</label><br>
+                <input type="checkbox" id="csm5" name="options" value="csm5">
+                <label for="csm5">5</label><br>
+                <input type="checkbox" id="csm6" name="options" value="csm6">
+                <label for="csm6">6</label><br>
+                <input type="checkbox" id="csm7" name="options" value="csm7">
+                <label for="csm7">7</label><br>
+                <input type="checkbox" id="csm8" name="options" value="csm8">
+                <label for="csm8">8</label><br>
+            </div>
+            </div>
+            <div id="csw" class="hidden">
+            <div class="ec">
+                <label class="f-1">CSW</label>
+                <input type="checkbox" id="csw1" name="options" value="csw1">
+                <label for="csw1">1</label><br>
+                <input type="checkbox" id="csw2" name="options" value="csw2">
+                <label for="csw2">2</label><br>
+                <input type="checkbox" id="csw3" name="options" value="csw3">
+                <label for="csw3">3</label><br>
+                <input type="checkbox" id="csw4" name="options" value="csw4">
+                <label for="csw4">4</label><br>
+                <input type="checkbox" id="csw5" name="options" value="csw5">
+                <label for="csw5">5</label><br>
+                <input type="checkbox" id="csw6" name="options" value="csw6">
+                <label for="csw6">6</label><br>
+                <input type="checkbox" id="csw7" name="options" value="csw7">
+                <label for="csw7">7</label><br>
+                <input type="checkbox" id="csw8" name="options" value="csw8">
+                <label for="csw8">8</label><br>
+            </div>
+            </div>
+            <div id="cso" class="hidden">
+            <div class="ec">
+                <label class="f-1">CSO</label>
+                <input type="checkbox" id="cso1" name="options" value="cso1">
+                <label for="cso1">1</label><br>
+                <input type="checkbox" id="cso2" name="options" value="cso2">
+                <label for="cso2">2</label><br>
+                <input type="checkbox" id="cso3" name="options" value="cso3">
+                <label for="cso3">3</label><br>
+                <input type="checkbox" id="cso4" name="options" value="cso4">
+                <label for="cso4">4</label><br>
+                <input type="checkbox" id="cso5" name="options" value="cso5">
+                <label for="cso5">5</label><br>
+                <input type="checkbox" id="cso6" name="options" value="cso6">
+                <label for="cso6">6</label><br>
+                <input type="checkbox" id="cso7" name="options" value="cso7">
+                <label for="cso7">7</label><br>
+                <input type="checkbox" id="cso8" name="options" value="cso8">
+                <label for="cso8">8</label><br>
+            </div>
+            </div>
+            <div id="cse" class="hidden">
+            <div class="ec">
+                <label class="f-1">CSE</label>
+                <input type="checkbox" id="cse1" name="options" value="cse1">
+                <label for="cse1">1</label><br>
+                <input type="checkbox" id="cse2" name="options" value="cse2">
+                <label for="cse2">2</label><br>
+                <input type="checkbox" id="cse3" name="options" value="cse3">
+                <label for="cse3">3</label><br>
+                <input type="checkbox" id="cse4" name="options" value="cse4">
+                <label for="cse4">4</label><br>
+                <input type="checkbox" id="cse5" name="options" value="cse5">
+                <label for="cse5">5</label><br>
+                <input type="checkbox" id="cse6" name="options" value="cse6">
+                <label for="cse6">6</label><br>
+                <input type="checkbox" id="cse7" name="options" value="cse7">
+                <label for="cse7">7</label><br>
+                <input type="checkbox" id="cse8" name="options" value="cse8">
+                <label for="cse8">8</label><br>
+            </div>
+            </div>
+            <br />
+            <div class="ec">
+                <label for="question" class="f-1">Question*</label>
+                <textarea id="question" name="question" rows="4" cols="50" required class="f-2"></textarea>
+            </div>
+            <div class="ec">
+                <label for="q_img" class="f-1">Question Image</label>
+                <input type="file" name="q_img" id="q_img" accept="image/*" class="f-2">
+            </div>
+
+            <!-- Buttons to toggle visibility -->
+            <div class="ec">
+                <label class="f-1">Answer Type*</label>
+                <button type="button" onclick="showOptions()" class="btn">Options</button>
+                <button type="button" onclick="showDescriptive()" class="btn">Descriptive</button>
+            </div>
+
+            <!-- Options Section -->
+            <div id="options-section" class="hidden">
+                <div class="ec">
+                    <label for="opt_A" class="f-1">A*</label>
+                    <textarea id="opt_A" name="opt_A" rows="4" cols="50" class="f-2"></textarea>
+                </div><br>
+                <div class="ec">
+                    <label for="opt_A_img" class="f-1">Image for A</label>
+                    <input type="file" name="opt_A_img" id="opt_A_img" accept="image/*" class="f-2">
+                </div><br>
+                <div class="ec">
+                    <label for="opt_B" class="f-1">B*</label>
+                    <textarea id="opt_B" name="opt_B" rows="4" cols="50" class="f-2"></textarea>
+                </div><br>
+                <div class="ec">
+                    <label for="opt_B_img" class="f-1">Image for B</label>
+                    <input type="file" name="opt_B_img" id="opt_B_img" accept="image/*" class="f-2">
+                </div><br>
+                <div class="ec">
+                    <label for="opt_C" class="f-1">C*</label>
+                    <textarea id="opt_C" name="opt_C" rows="4" cols="50" class="f-2"></textarea>
+                </div><br>
+                <div class="ec">
+                    <label for="opt_C_img" class="f-1">Image for C</label>
+                    <input type="file" name="opt_C_img" id="opt_C_img" accept="image/*" class="f-2">
+                </div><br>
+                <div class="ec">
+                    <label for="opt_D" class="f-1">D*</label>
+                    <textarea id="opt_D" name="opt_D" rows="4" cols="50" class="f-2"></textarea>
+                </div><br>
+                <div class="ec">
+                    <label for="opt_D_img" class="f-1">Image for D</label>
+                    <input type="file" name="opt_D_img" id="opt_D_img" accept="image/*" class="f-2">
+                </div><br>
+                <div class="ec">
+                    <label for="opt_ans" class="f-1">Option Answer*</label>
+                    <select id="opt_ans" name="opt_ans" class="f-2">
+                        <option value="0">Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Descriptive Section -->
+            <div id="descriptive-section" class="hidden">
+                <div class="ec">
+                    <label for="answer" class="f-1">Descriptive Answer*</label>
+                    <textarea id="answer" name="answer" rows="4" cols="50" class="f-2"></textarea>
+                </div>
+            </div>
+
+
+            <div class="ec">
+                <label for="q_marks" class="f-1">Marks*</label>
+                <input type="number" name="q_marks" id="q_marks" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="start_datetime" class="f-1">Start Date and Time:*</label>
+                <input type="datetime-local" id="start_datetime" name="start_datetime" required class="f-2">
+            </div>
+            <div class="ec">
+                <label for="end_datetime" class="f-1">End Date and Time:*</label>
+                <input type="datetime-local" id="end_datetime" name="end_datetime" required class="f-2">
+            </div>
+            <div class="ec">
+                <a href="{{ url_for('exams') }}" class="btn">Cancel</a>
+                <button type="submit" value="submit" class="btn">Create Exam</button>
+            </div>
+        </form>
+        </div>
+        <!-- <div class="right-column">
+            <div class="box-container">
+            </div>
+        </div> -->
+    </div>
+</section>
+
+
+<script>
+    function showOptions() {
+        document.getElementById('options-section').classList.remove('hidden');
+        document.getElementById('descriptive-section').classList.add('hidden');
+    }
+
+    function showDescriptive() {
+        document.getElementById('descriptive-section').classList.remove('hidden');
+        document.getElementById('options-section').classList.add('hidden');
+    }
+</script>
+
+<script>
+    function csm() {
+        document.getElementById('csm').classList.remove('hidden');
+        document.getElementById('csw').classList.add('hidden');
+        document.getElementById('cso').classList.add('hidden');
+        document.getElementById('cse').classList.add('hidden');
+    }
+
+    function csw() {
+        document.getElementById('csw').classList.remove('hidden');
+        document.getElementById('csm').classList.add('hidden');
+        document.getElementById('cso').classList.add('hidden');
+        document.getElementById('cse').classList.add('hidden');
+    }
+
+    function cso() {
+        document.getElementById('cso').classList.remove('hidden');
+        document.getElementById('csm').classList.add('hidden');
+        document.getElementById('csw').classList.add('hidden');
+        document.getElementById('cse').classList.add('hidden');
+    }
+
+    function cse() {
+        document.getElementById('cse').classList.remove('hidden');
+        document.getElementById('csm').classList.add('hidden');
+        document.getElementById('csw').classList.add('hidden');
+        document.getElementById('cso').classList.add('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+		// Get all clickable links and buttons
+		const clickableElements = document.querySelectorAll('.btn');
+
+		// Add click event listener to each element
+		clickableElements.forEach(function (element) {
+			element.addEventListener('click', function () {
+				// Remove 'clicked' class from all elements
+				clickableElements.forEach(function (el) {
+					el.classList.remove('clicked');
+				});
+
+				// Add 'clicked' class to the clicked element
+				this.classList.add('clicked');
+			});
+		});
+	});
+</script>
+
+</body>
+</html>

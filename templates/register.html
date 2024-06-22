@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Descriptive Exam Evaluation System</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/logreg.css" />
+</head>
+<body>
+	<h2>Student Registration</h2>
+<div class="login-form register">
+	<form method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data" >
+
+		
+		<h4>Required Fields</h4>
+
+		<div class="form-input-material">
+			<input type="text" name="fname" id="fname" placeholder=" " required class="form-control-material" />
+			<label for="fname">First Name</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="text" name="lname" id="lname" placeholder=" " required class="form-control-material" />
+			<label for="lname">Last Name</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="text" name="rollnumber" id="rollnumber" placeholder=" " required class="form-control-material" />
+			<label for="rollnumber">Roll Number</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="password" name="password" id="password" placeholder=" " required class="form-control-material" />
+			<label for="password">Password</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="password" name="repassword" id="repassword" placeholder=" " required class="form-control-material" />
+			<label for="repassword">Re-Enter Password</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="email" name="email" id="email" placeholder=" " required class="form-control-material" />
+			<label for="email">Email</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="tel" name="mob_no" id="mob_no" pattern="[0-9]{10}" placeholder=" " required class="form-control-material" />
+			<label for="mob_no">Mobile Number</label>
+		</div>
+
+		<div class="select">
+			<br />
+			<label for="department">Department</label>
+			<select id="department" name="department" placeholder=" " required class="form-control-material">
+				<option value="0">Select</option>
+				<option value="CSE">CSE</option>
+				<option value="CSM">CSM</option>
+				<option value="CSW">CSW</option>
+				<option value="CSO">CSO</option>
+			</select><br><br>
+		</div>
+
+		<div class="select">
+			<label for="sem">Semester&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+			<select id="sem" name="sem" placeholder=" " required class="form-control-material">
+				<option value="0">Select</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+			</select>
+		</div>
+
+		
+</div>
+<div class="login-form register">
+	<h4>Optional Fields</h4>
+		<div class="form-input-material">
+			<input type="date" name="dob" id="dob" placeholder=" " class="form-control-material" />
+			<label for="dob">Date of Birth</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="text" name="guardian" id="guardian" placeholder=" " class="form-control-material" />
+			<label for="guardian">Guardian Name</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="tel" name="g_mob_no" id="g_mob_no" pattern="[0-9]{10}" placeholder=" " class="form-control-material" />
+			<label for="g_mob_no">Guardian Mobile Number</label>
+		</div>
+
+		<div class="form-input-material">
+			<input type="file" name="img" id="img" accept="image/*" placeholder=" " class="form-control-material" />
+			<label for="img">Profile Picture</label>
+		</div>
+
+		<!-- <div class="form-input-material">
+			<textarea id="about" name="about" placeholder=" " class="form-control-material" ></textarea>
+			<label for="about">About You</label>
+		</div> -->
+
+		<h4>{{ msg }}</h4>
+
+		<button type="submit" class="btn btn-ghost">Register</button>
+		<button type="reset" class="btn btn-ghost">Reset</button>
+		<p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+	</form>
+</div>
+</body>
+</html>
